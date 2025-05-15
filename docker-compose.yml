@@ -1,0 +1,21 @@
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.0
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+  suricata:
+    image: jasonish/suricata:latest
+    command: -i eth0
+    volumes:
+      - ./suricata.yaml:/etc/suricata/suricata.yaml
+    network_mode: bridge

@@ -1,0 +1,50 @@
+%YAML 1.1
+---
+# Basic Suricata configuration for network anomaly detection
+vars:
+  # Network interfaces
+  - interface: eth0
+
+outputs:
+  # JSON alert logging
+  - eve-log:
+      enabled: yes
+      filetype: regular
+      filename: /var/log/suricata/eve.json
+      types:
+        - alert
+        - anomaly
+
+# Detection engine settings
+default-rule-path: /etc/suricata/rules
+rule-files:
+  - suricata.rules
+
+# Set detection thresholds
+detect-engine:
+  - profile: medium
+  - custom-values:
+      toclient-src-groups: 2
+      toclient-dst-groups: 2
+      toclient-sp-groups: 2
+      toclient-dp-groups: 3
+
+# Application layer protocols we want to inspect
+app-layer:
+  protocols:
+    http:
+      enabled: yes
+    tls:
+      enabled: yes
+
+# Set anomaly detection thresholds
+anomaly:
+  enabled: yes
+  score_threshold: 10
+  types:
+    - tcp
+    - icmp
+    - ip
+    - flow
+  logging:
+    mode: all
