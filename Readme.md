@@ -17,17 +17,17 @@ A modular, locally deployable cybersecurity solution that leverages stream proce
 
 ## 🛠️ Installation
 
-Clone the repository
+#Clone the repository
 
 git clone https://github.com/suhailjamil/Capstone_Project.git
 
 cd Capstone_Project
 
-Start required services
+#Start required services
 
 docker-compose up -d --build
 
-Install Python dependencies
+#Install Python dependencies
 
 pip install -r requirements.txt
 
@@ -35,43 +35,17 @@ pip install -r requirements.txt
 
 ## ⚡ Usage
 
-Run the anomaly detection system with simulated traffic
+#Run the anomaly detection system with simulated traffic
 
 python3 src/main.py --simulate 
 
-(Optional) View Suricata alerts in real time
+#(Optional) View Suricata alerts in real time
 
 tail -f data/processed/suricata.log
 
 
 ---
 
-## 📁 Project Structure
-
-├── data/
-│ ├── raw/ # Place CIDDS-001 dataset here
-
-│ └── processed/ # Processed features, logs, and SQLite DB
-
-├── src/
-
-│ ├── data_processing/ # ETL and feature extraction scripts
-
-│ ├── models/ # Anomaly detection (DBSCAN)
-
-│ ├── network/ # Kafka producer, firewall API
-
-│ └── main.py # System orchestration
-
-├── docker-compose.yml # Kafka, Zookeeper, Suricata services
-
-├── Dockerfile # Python runtime
-├── suricata.yaml # IDS rules/config
-└── README.md # This file
-
-text
-
----
 
 ## 🔑 Key Technologies
 
